@@ -1,0 +1,9 @@
+:global data  [system clock get date]
+:global hora  [system clock get time]
+:global name  [/system identity get name]
+:global email [/tool e-mail get user]
+export file="$name.rsc"
+:delay 2s
+/system backup save name=$name
+/tool e-mail send to="$email" subject="Mikrotik: Backup $data as $hora" file="$name.rsc,$name.backup" body="$name realizado a $hora as $data."
+:log warning ("Realizado Auto Backup $name")
